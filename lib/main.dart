@@ -1,4 +1,5 @@
 import 'package:expify/core/theme/light.dart';
+import 'package:expify/features/on_boarding/transactins_page.dart';
 import 'package:flutter/material.dart';
 import 'core/navigation/app_navigation.dart';
 
@@ -17,10 +18,11 @@ class MyApp extends StatelessWidget {
     //   theme: lightTheme,
     //   routerConfig: appRouter,
     // );
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      routerConfig: appRouter,
+      home: TransactionPage(),
     );
   }
 }
