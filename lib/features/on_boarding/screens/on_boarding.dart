@@ -16,6 +16,7 @@ class OnBoarding extends StatelessWidget {
             PrimaryInput(label: 'Email', hint: 'Enter your email'),
             PrimaryButton(
               title: 'Continue',
+
               onPressed: () {
                 // Handle button press
               },
