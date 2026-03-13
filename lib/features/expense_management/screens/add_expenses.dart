@@ -1,4 +1,6 @@
+import 'package:expify/core/theme/colors.dart';
 import 'package:flutter/material.dart';
+
 
 class AddExpenses extends StatefulWidget {
   const AddExpenses({Key? key}) : super(key: key);
@@ -8,12 +10,11 @@ class AddExpenses extends StatefulWidget {
 }
 
 class _AddExpensesState extends State<AddExpenses> {
-
   final _formKey = GlobalKey<FormState>();
   final TextEditingController amountController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
 
-  DateTime selectedDate = DateTime(2023,10,27);
+  DateTime selectedDate = DateTime(2023, 10, 27);
 
   Future<void> pickDate() async {
     DateTime? picked = await showDatePicker(
@@ -23,52 +24,53 @@ class _AddExpensesState extends State<AddExpenses> {
       lastDate: DateTime(2030),
     );
 
-    if(picked != null){
+    if (picked != null) {
       setState(() {
         selectedDate = picked;
       });
     }
   }
 
-  void saveExpense(){
-    if(_formKey.currentState!.validate()){
+  void saveExpense() {
+    if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Expense Saved"))
+        SnackBar(
+          backgroundColor: Appcolors.successColor,
+          content: const Text("Expense Saved"),
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      backgroundColor: const Color(0xffF5F6F8),
+      backgroundColor: Appcolors.lightScaffold,
 
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Appcolors.white,
         centerTitle: true,
-
         leadingWidth: 80,
 
         leading: TextButton(
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text(
+          child: Text(
             "Cancel",
             style: TextStyle(
-              color: Color(0xff1976D2),
+              color: Appcolors.primaryColor,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
         ),
 
-        title: const Text(
+        title: Text(
           "Add Expense",
           style: TextStyle(
-            color: Colors.black,
+            color: Appcolors.black,
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
@@ -78,18 +80,17 @@ class _AddExpensesState extends State<AddExpenses> {
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-
               const SizedBox(height: 24),
 
-              const Text(
+              Text(
                 "AMOUNT",
                 style: TextStyle(
                   fontSize: 12,
                   letterSpacing: 1.5,
-                  color: Colors.grey,
+                  color: Appcolors.darkGrey,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -99,12 +100,11 @@ class _AddExpensesState extends State<AddExpenses> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-
-                  const Text(
+                  Text(
                     "\$",
                     style: TextStyle(
                       fontSize: 30,
-                      color: Colors.grey,
+                      color: Appcolors.darkGrey,
                     ),
                   ),
 
@@ -116,134 +116,133 @@ class _AddExpensesState extends State<AddExpenses> {
                       controller: amountController,
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 42,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xff6C727F),
+                        color: Appcolors.darkGrey,
                       ),
                       decoration: const InputDecoration(
                         hintText: "0.00",
                         border: InputBorder.none,
                       ),
-                      validator: (value){
-                        if(value == null || value.isEmpty){
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
                           return "Enter amount";
                         }
                         return null;
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
 
               const SizedBox(height: 24),
 
-            
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Appcolors.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
 
                 child: Column(
                   children: [
-
-                
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal:16,
-                        vertical:14,
+                        horizontal: 16,
+                        vertical: 14,
                       ),
                       child: Row(
                         children: [
-
                           CircleAvatar(
-                            radius:18,
-                            backgroundColor: Colors.orange.withOpacity(.15),
-                            child: const Icon(
+                            radius: 18,
+                            backgroundColor:
+                                Appcolors.warningColor.withOpacity(.15),
+                            child: Icon(
                               Icons.monetization_on,
-                              color: Colors.orange,
+                              color: Appcolors.warningColor,
                             ),
                           ),
 
-                          const SizedBox(width:12),
+                          const SizedBox(width: 12),
 
-                          const Expanded(
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-
                                 Text(
                                   "Category",
                                   style: TextStyle(
-                                    fontSize:14,
-                                    color: Colors.grey,
+                                    fontSize: 14,
+                                    color: Appcolors.darkGrey,
                                   ),
                                 ),
 
-                                SizedBox(height:2),
+                                const SizedBox(height: 2),
 
                                 Text(
                                   "Food & Dining",
                                   style: TextStyle(
-                                    fontSize:16,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w500,
+                                    color: Appcolors.black,
                                   ),
                                 ),
                               ],
                             ),
                           ),
 
-                          const Icon(Icons.keyboard_arrow_down)
+                          Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Appcolors.darkGrey,
+                          ),
                         ],
                       ),
                     ),
 
-                    const Divider(height:1),
+                    Divider(height: 1, color: Appcolors.lightGrey),
 
-                
                     GestureDetector(
                       onTap: pickDate,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal:16,
-                          vertical:14,
+                          horizontal: 16,
+                          vertical: 14,
                         ),
                         child: Row(
                           children: [
-
                             CircleAvatar(
-                              radius:18,
-                              backgroundColor: Colors.blue.withOpacity(.15),
-                              child: const Icon(
+                              radius: 18,
+                              backgroundColor:
+                                  Appcolors.secondaryColor.withOpacity(.15),
+                              child: Icon(
                                 Icons.calendar_today,
-                                color: Colors.blue,
-                                size:20,
+                                color: Appcolors.secondaryColor,
+                                size: 20,
                               ),
                             ),
 
-                            const SizedBox(width:12),
+                            const SizedBox(width: 12),
 
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-
-                                  const Text(
+                                  Text(
                                     "Date",
                                     style: TextStyle(
-                                      fontSize:14,
-                                      color: Colors.grey,
+                                      fontSize: 14,
+                                      color: Appcolors.darkGrey,
                                     ),
                                   ),
 
-                                  const SizedBox(height:2),
+                                  const SizedBox(height: 2),
 
                                   Text(
                                     "${selectedDate.month}/${selectedDate.day}/${selectedDate.year}",
-                                    style: const TextStyle(
-                                      fontSize:16,
+                                    style: TextStyle(
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w500,
+                                      color: Appcolors.black,
                                     ),
                                   ),
                                 ],
@@ -254,39 +253,41 @@ class _AddExpensesState extends State<AddExpenses> {
                       ),
                     ),
 
-                    const Divider(height:1),
+                    Divider(height: 1, color: Appcolors.lightGrey),
 
-                
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal:16,
-                        vertical:12,
+                        horizontal: 16,
+                        vertical: 12,
                       ),
                       child: Row(
                         children: [
-
                           CircleAvatar(
-                            radius:18,
-                            backgroundColor: Colors.grey.withOpacity(.15),
-                            child: const Icon(
+                            radius: 18,
+                            backgroundColor:
+                                Appcolors.darkGrey.withOpacity(.15),
+                            child: Icon(
                               Icons.edit,
-                              color: Colors.grey,
-                              size:20,
+                              color: Appcolors.darkGrey,
+                              size: 20,
                             ),
                           ),
 
-                          const SizedBox(width:12),
+                          const SizedBox(width: 12),
 
                           Expanded(
                             child: TextFormField(
                               controller: noteController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 labelText: "Note",
                                 hintText: "Add an optional note...",
                                 border: InputBorder.none,
+                                labelStyle: TextStyle(
+                                  color: Appcolors.darkGrey,
+                                ),
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -294,32 +295,33 @@ class _AddExpensesState extends State<AddExpenses> {
                 ),
               ),
 
-              const Spacer(),
+              const SizedBox(height: 24),
 
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: SizedBox(
                   width: double.infinity,
-                  height:55,
+                  height: 55,
                   child: ElevatedButton(
                     onPressed: saveExpense,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff1976D2),
+                      backgroundColor: Appcolors.primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
                       ),
                       elevation: 0,
                     ),
-                    child: const Text(
+                    child: Text(
                       "Save Expense",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
+                        color: Appcolors.white,
                       ),
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
