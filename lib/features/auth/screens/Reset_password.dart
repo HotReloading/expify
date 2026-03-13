@@ -34,7 +34,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 ),
               ),
               const SizedBox(height: 25),
-
               Center(
                 child: Text(
                   "Reset Password",
@@ -46,7 +45,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 ),
               ),
               const SizedBox(height: 8),
-
               Center(
                 child: Text(
                   "Reset Password easily",
@@ -63,7 +61,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 ),
               ),
               const SizedBox(height: 5),
-
               TextField(
                 controller: emailController,
                 decoration: InputDecoration(
@@ -84,7 +81,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 15),
+
               Text(
                 "New Password",
                 style: TextStyle(
@@ -114,7 +113,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 15),
+
               Text(
                 "Re-enter Password",
                 style: TextStyle(
@@ -144,7 +145,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 25),
+
               SizedBox(
                 width: double.infinity,
                 height: 50,
